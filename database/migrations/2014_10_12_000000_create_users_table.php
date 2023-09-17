@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('profile_url')->nullable();
+            $table->boolean('is_ban')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

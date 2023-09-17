@@ -12,7 +12,7 @@
                             {{ $post->positiontitle }}
                             {{ $post->jobminsalary . 'k - ' . $post->jobmaxsalary . 'k' }} <br />
                             {{ $post->joblocation }}
-                        </p>
+                         </p>
                         <a href="{{ route('posts.detail', $post->id) }}" class="btn btn-sm btn-primary">all Details</a>
                         @if ($post->user_id == auth()->user()->id)
                             <a href="{{ route('posts.edit' , $post->id) }}" class="btn btn-sm btn-primary">Edit Post</a>

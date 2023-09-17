@@ -28,6 +28,7 @@
                             </li>
                         </ul>
                     </li>
+                    @hasanyrole(['admin', 'employer'])
                     <li>
                         <a href="
                         {{ route('category.all') }}" class="side-menu">
@@ -49,7 +50,18 @@
                         </a>
                        
                     </li>
-           
+
+                    <li>
+                        <a href="
+                           {{ route('all.users') }}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
+                            <div class="side-menu__title">
+                              All Users 
+                            </div>
+                        </a>
+                       
+                    </li>
+                    @endhasanyrole
         </ul>
 
                 <li>
@@ -73,20 +85,21 @@
             </div>
         </a>
         <ul class=" {{ request()->routeIs('posts.*') ? 'side-menu__sub-open' : '' }}">
+            @hasanyrole(['admin', 'employer'])
             <li>
                 <a href="{{ route('posts.add') }}" class="side-menu side-menu--active side-menu--open">
                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                     <div class="side-menu__title"> Add Posts </div>
                 </a>
             </li>
-          
+            @endhasanyrole
             <li>
                 <a href="{{ route('posts.all') }}" class="side-menu">
                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                     <div class="side-menu__title"> All Posts </div>
                 </a>
             </li>
-            
+           
         </ul>
     </li>
 

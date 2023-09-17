@@ -83,6 +83,18 @@ class HomeController extends Controller
              return back();
     }
 
+    public function getAllUser()
+    {
+       $users = User::all();
+        return view('backend.users',compact('users'));
+    } 
+public function banUser($id)
+    {
+       $users = User::find($id);
+       $users->is_ban = true;
+       $users->save();
+       return back();
+    } 
 
 
 }

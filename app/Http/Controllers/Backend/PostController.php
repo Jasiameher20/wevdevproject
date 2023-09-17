@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Helpers\SlugBuilder;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -90,10 +91,12 @@ class PostController extends Controller
       $post->education= $request->education ;
       $post->workexperience = $request->workexperience ;
       $post->seat = $request->seat ;
-      $post->slug = $this->slugGenerator($request, Post::class);
+      //$post->slug = $this->slugGenerator($request, Post::class);
+      $post->slug = Str::slug($request->jobtitle). '-' . uniqid();
       $post->save();
      // return view('backend.posts.addPost', compact('editPost'));
-      return back();
+     return redirect()->route('posts.all');
+     // return back();
 
    }
   

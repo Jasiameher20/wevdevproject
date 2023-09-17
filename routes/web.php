@@ -18,18 +18,17 @@ use App\Http\Controllers\Backend\SubCategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.homepage');
-});
+
 
 Auth::routes();
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-Route::prefix("/admin/")->group(function(){
+Route::middleware(['auth','isBan'])->prefix("/admin/")->group(function(){
 
 
-
+Route::get('/get-users', [HomeController::class, 'getAllUser'])->name('all.users');
+Route::get('/ban-users/{id}', [HomeController::class, 'banUser'])->name('ban.users');
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
 Route::put('/profile/password-update', [HomeController::class, 'passwordUpdate'])->name('profile.password.update');
@@ -40,7 +39,7 @@ Route::put('/profile/user-info', [HomeController::class, 'profileUpdate'])->name
 /**
  * CATEGORY ROUTES
  */
-Route::prefix("/categories")->controller(categoryController::class)->name('category.')->group(function(){
+Route::middleware('role:admin|employer')->prefix("/categories")->controller(categoryController::class)->name('category.')->group(function(){
     
     Route::get('/', 'getAllCategories')->name('all');
     Route::post('/store', 'storeCategory')->name('store');
@@ -52,7 +51,7 @@ Route::prefix("/categories")->controller(categoryController::class)->name('categ
  /**
  * SUB-CATEGORY ROUTES
  */
-Route::prefix('/sub-categories/')->controller(SubCategoryController::class)->name('subcategories.')->group(function(){
+Route::middleware('role:admin|employer')->prefix('/sub-categories/')->controller(SubCategoryController::class)->name('subcategories.')->group(function(){
     
     Route::get('/', 'getAllSubCategory')->name('all');
     Route::post('/store', 'storeSubCategory')->name('store');
@@ -67,11 +66,11 @@ Route::prefix('/sub-categories/')->controller(SubCategoryController::class)->nam
         
  
 Route::prefix('/posts/')->controller(PostController::class)->name('posts.')->group(function () {
-    Route::get('/', 'addPosts')->name('add');
-    Route::get('/getallPosts', 'getallPosts')->name('all');
+    Route::middleware(["role:employer|admin"])->get('/', 'addPosts')->name('add');
+    Route::middleware(["role:employer|admin"])->get('/getallPosts', 'getallPosts')->name('all');
     Route::get('/postDetail/{id}', 'postDetail')->name('detail');
-    Route::get('/postEdit/{id}', 'postEdit')->name('edit');
-    Route::post('/postUpdate/{id}', 'postUpdate')->name('update');
+    Route::middleware(["role:employer|admin"])->get('/postEdit/{id}', 'postEdit')->name('edit');
+    Route::middleware(["role:employer|admin"])->post('/postUpdate/{id}', 'postUpdate')->name('update');
     Route::post('/store', 'storePosts')->name('store');
 
     //Route::get('/edit/{slug}',"editPost")->name('edit');
