@@ -9,7 +9,10 @@ class FrontenhomeController extends Controller
 {
      public function home(){
         $allPost  = Post::all();
-        // dd($allPost);
+        //dd($allPost);
+
+
+        
         return view('frontend.homepage',compact('allPost'));
      }
 }

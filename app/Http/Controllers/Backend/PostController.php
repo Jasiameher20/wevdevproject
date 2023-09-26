@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Post;
-use Illuminate\Support\Str;
+use App\Models\AppliedJob;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,7 @@ class PostController extends Controller
       $post->education= $request->education ;
       $post->workexperience = $request->workexperience ;
       $post->seat = $request->seat ;
-      $post->slug = $this->slugGenerator($request, Post::class);
+      $post->slug = Str::slug($request->jobtitle);
       $post->save();
      return redirect(route('posts.all'));
      
@@ -99,5 +100,45 @@ class PostController extends Controller
      // return back();
 
    }
+   public function postApprove()
+   {
+      $allJobPost  = Post::all();
+      // dd($allJobPost);
+      return view('backend.posts.approvePost',compact('allJobPost'));
+      //  $allJobPost->status = '1';
+      //  $allJobPost->save();
+      //  return back();
+   }
+   public function postdisApprove($id)
+   {
+       Post::where('id', $id)->delete();
+       return back();
+   }
+   public function postApprovel($id)
+   {
+       $post = Post::find($id);
+       $post->status = 1;
+       $post->save();
+       return back();
+
+   }
+//    public function JobAppliedPost($id){
+//     $appliedJob=AppliedJob::where('job_post_id',$id)->simplePaginate(12);
+//     return view('',compact('appliedJob'));
+// }
+
+//    public function appliedPost($id)
+//    {
+   
+//     $appliedJob=AppliedJob::where('post_id',$id)->simplePaginate(12);
+//     return view('backend.posts.appliedJob',compact('appliedJob'));
+    
+//    }
+//     public function deniedPost($id){
+//     $applied=AppliedJob::where('id',$id)->delete();
+//     return back();
+// }
+
+   
   
 }

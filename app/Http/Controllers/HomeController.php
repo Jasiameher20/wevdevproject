@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\appliedforjob;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\JobForUser;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -88,6 +91,13 @@ class HomeController extends Controller
        $users = User::all();
         return view('backend.users',compact('users'));
     } 
+    public function AllEmployer()
+    {
+       $employers = User::all();
+        return view('backend.employers',compact('employers'));
+    } 
+   
+    
 public function banUser($id)
     {
        $users = User::find($id);
@@ -95,6 +105,21 @@ public function banUser($id)
        $users->save();
        return back();
     } 
-
-
+    public function activeUser($id)
+    {
+       $users = User::find($id);
+       $users->is_ban = false;
+       $users->save();
+       return back();
+    } 
+    public function  likePost()
+    {
+        $likePost = JobForUser::with('jobPost')->where('user_id',auth()->user()->id)->get();
+        return view('backend.posts.likedPost',compact('likePost'));
+    } 
+    public function  deniedPost($id)
+    {
+        $applied=appliedforjob::where('id',$id)->delete();
+        return back();
+    } 
 }

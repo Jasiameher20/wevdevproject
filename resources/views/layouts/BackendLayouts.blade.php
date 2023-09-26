@@ -11,6 +11,8 @@
         <title>Dashboard - Rubick - Bootstrap HTML Admin Template</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('backend/dist/css/app.css') }}"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
         <!-- END: CSS Assets-->
         @stack('css')
     </head>
@@ -28,7 +30,7 @@
             </nav>
             <!-- END: Side Menu -->
             <!-- BEGIN: Content -->
-            <div class="content">
+            <div class="content ">
                 <!-- BEGIN: Top Bar -->
                 <div class="top-bar">
                     <!-- BEGIN: Breadcrumb -->

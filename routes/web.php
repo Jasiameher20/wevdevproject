@@ -22,19 +22,24 @@ use App\Http\Controllers\Backend\SubCategoryController;
 
 Auth::routes();
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+
 
 Route::middleware(['auth','isBan'])->prefix("/admin/")->group(function(){
 
-
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 Route::get('/get-users', [HomeController::class, 'getAllUser'])->name('all.users');
+Route::get('/get-employers', [HomeController::class, 'AllEmployer'])->name('employer');
 Route::get('/ban-users/{id}', [HomeController::class, 'banUser'])->name('ban.users');
+Route::get('/active-users/{id}', [HomeController::class, 'activeUser'])->name('active.users');
+
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
 Route::put('/profile/password-update', [HomeController::class, 'passwordUpdate'])->name('profile.password.update');
 
 Route::put('/profile/user-info', [HomeController::class, 'profileUpdate'])->name('profile.user');
-
+Route::get('/likePost', [HomeController::class, 'likePost'])->name('userpost.like');
+Route::get('/deniedPost/{id}',[HomeController::class, 'deniedPost'] )->name('.denied');
+});
 
 /**
  * CATEGORY ROUTES
@@ -72,11 +77,16 @@ Route::prefix('/posts/')->controller(PostController::class)->name('posts.')->gro
     Route::middleware(["role:employer|admin"])->get('/postEdit/{id}', 'postEdit')->name('edit');
     Route::middleware(["role:employer|admin"])->post('/postUpdate/{id}', 'postUpdate')->name('update');
     Route::post('/store', 'storePosts')->name('store');
-
+    route::middleware('role:admin')->get('/approve', 'postApprove')->name('approve');
+    route::middleware('role:admin')->get('/disapprove/{id}', 'postdisApprove')->name('disapprove');
+    route::middleware('role:admin')->get('/approvel/{id}', 'postApprovel')->name('approvel');
+    route::middleware('role:admin')->get('/disapprovel/{id}', 'dispostApprovel')->name('approvel');
+    // Route::middleware(['role:employer|admin'])->get('/JobAppliedPost/{id}', 'JobAppliedPost')->name('.JobAppliedPost');
+    Route::get('/appliedPost', 'appliedPost')->name('applied');
+    Route::get('/deniedPost/{id}', 'deniedPost')->name('denied');
     //Route::get('/edit/{slug}',"editPost")->name('edit');
     // Route::get('/test', 'testPost')->name('test');
   
 });     
     
 
-});

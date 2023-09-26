@@ -28,8 +28,10 @@ class BanMiddleware
         { if(auth()->user()->is_ban == 1){
             Auth::logout();
             return redirect()->route('login');
-        }
-        return $next($request);
+        }else{
+             return $next($request);
+            }
+       
     }
        
     }

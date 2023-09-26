@@ -61,9 +61,27 @@
                         </a>
                        
                     </li>
+                    <li>
+                        <a href="
+                           {{ route('employer') }}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
+                            <div class="side-menu__title">
+                              All Employer 
+                            </div>
+                        </a>
+                       
+                    </li>
+                    
                     @endhasanyrole
         </ul>
-
+        <ul class="side-menu__sub-open">
+            <li> <a class="nav-link" href="{{ route('userpost.like') }}"> saved
+                </a>
+            </li>
+            <li> <a class="nav-link" href="#"> Apply
+                </a>
+            </li>
+        </ul>
                 <li>
                         <a href="" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
@@ -89,17 +107,24 @@
             <li>
                 <a href="{{ route('posts.add') }}" class="side-menu side-menu--active side-menu--open">
                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                    <div class="side-menu__title"> Add Posts </div>
+                    <div class="side-menu__title"> Add Job Posts </div>
                 </a>
             </li>
             @endhasanyrole
             <li>
                 <a href="{{ route('posts.all') }}" class="side-menu">
                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                    <div class="side-menu__title"> All Posts </div>
+                    <div class="side-menu__title"> All Job Posts </div>
                 </a>
             </li>
            
+            <li>
+                <a href="{{ route('posts.approve') }}" class="side-menu">
+                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                    <div class="side-menu__title"> Approve Job Posts </div>
+                </a>
+            </li>
+      
         </ul>
     </li>
 

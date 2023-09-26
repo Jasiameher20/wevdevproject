@@ -9,7 +9,9 @@
 <link rel="manifest" href="https://preview.colorlib.com/theme/jobfinderportal/site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-<link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}"> --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/flaticon.css') }}">
@@ -47,7 +49,7 @@
   <div class="main-menu">
   <nav class="d-none d-lg-block">
   <ul id="navigation">
-  <li><a href="index.html">Home</a></li>
+  <li><a href="{{ route('home') }}">Home</a></li>
   <li><a href="{{ route('forntpost.all') }}">Find a Jobs </a></li>
   <li><a href="about.html">About</a></li>
   <li><a href="index.html#">Page</a>
@@ -70,7 +72,7 @@
   @endguest
 
    @auth
-   <a href="{{ route('home') }}" class="btn head-btn2">Dashboard</a>
+   <a href="{{ route('login') }}" class="btn head-btn2">Dashboard</a>
    @endauth
   </div>
   </div>

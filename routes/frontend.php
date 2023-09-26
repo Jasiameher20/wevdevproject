@@ -12,6 +12,8 @@ Route::middleware('auth')->prefix("/frontend")->controller(PostController::class
     Route::get('/post', 'allPost')->name('all');
     Route::get('/appliedforjob/{id}', 'appliedjobpost')->name('appliedjobpost');
     Route::post('/appliedjobs/', 'appliedjob')->name('appliedjob');
+    Route::middleware('role:user')->get('/jobLike/{id}','jobLike')->name('jobLike');
+    Route::middleware('role:user')->get('/disLike/{id}','disLike')->name('disLike');
 
 });
 
